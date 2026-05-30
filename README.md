@@ -164,17 +164,17 @@ This dashboard converts raw transactional records into actionable operational st
 ---
 
 ## 11. Installation & Usage
-* 1. **Prerequisites**
+* **Prerequisites**
 Microsoft Power BI Desktop (Latest stable release recommended)
 
 A local clone or download of this repository's assets
 
 Setup Steps
-* 2. **Clone the Repository Assets:**
+*  **Clone the Repository Assets:**
 git clone https://github.com/yourusername/mobility-performance-analytics.git
-* 3. **Prepare the Data Source Layer:** Place the target localized tabular dataset file (rideBookings.csv) into your dedicated data directory.
-* 4. **Open the Analytical Project File:** Launch Microsoft Power BI Desktop and open the project file (Tax Fare Report.pbix).
-* 5. **Update File Pathways:**
+* **Prepare the Data Source Layer:** Place the target localized tabular dataset file (rideBookings.csv) into your dedicated data directory.
+* **Open the Analytical Project File:** Launch Microsoft Power BI Desktop and open the project file (Tax Fare Report.pbix).
+* **Update File Pathways:**
 Inside Power BI Desktop, click on Transform Data to open the Power Query Editor interface.
 
 Under Queries, select your base source path parameters or data tables.
