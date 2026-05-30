@@ -1,0 +1,157 @@
+DATA ANALYSIS EXPRESSIONS (DAX)
+================================================================================
+
+1. GLOBAL BOOKING VOLUME (TOTAL REQUESTS)
+--------------------------------------------------------------------------------
+Formula:
+Total Bookings = COUNTROWS('Fact_Ride_Bookings')
+
+Technical Architecture Details:
+This metric uses the high-performance COUNTROWS calculation engine instead of 
+counting specific columns. By referencing the table directly, it minimizes 
+memory scanning, resulting in a lightweight, reliable baseline indicator for 
+cross-filtering across all dimensions.
+
+Business Case Utility:
+Establishes the foundational demand baseline, tracking total rider request 
+volumes before any cancellations or fulfillment issues occur.
+--------------------------------------------------------------------------------
+
+
+2. GROSS MERCHANDISE VALUE / REALIZED BOOKING REVENUE
+--------------------------------------------------------------------------------
+Formula:
+Gross Realized Revenue = 
+CALCULATE(
+    SUM('Fact_Ride_Bookings'[Booking Value]),
+    'Fact_Ride_Bookings'[Booking Status] = "Completed"
+)
+
+Technical Architecture Details:
+Utilizes Boolean filter propagation inside the CALCULATE function to isolate 
+realized sales transactions. This approach leverages Power BI's VertiPaq columns 
+for fast execution, ignoring unfulfilled or canceled bookings to prevent 
+revenue inflation.
+
+Business Case Utility:
+Serves as the core financial KPI, tracking actual realized revenue from 
+successfully completed trips to help leadership evaluate real platform growth.
+--------------------------------------------------------------------------------
+
+
+3. PLATFORM FULFILLMENT YIELD EFFICIENCY (%)
+--------------------------------------------------------------------------------
+Formula:
+Fulfillment Yield Rate = 
+DIVIDE(
+    CALCULATE(COUNTROWS('Fact_Ride_Bookings'), 'Fact_Ride_Bookings'[Booking Status] = "Completed"),
+    [Total Bookings],
+    0
+)
+
+Technical Architecture Details:
+Uses the defensive DIVIDE function to safely handle division calculations. 
+By defining a clean fallback alternative (0), it prevents standard divide-by-zero 
+errors during rare periods with zero ride requests, ensuring stable visuals.
+
+Business Case Utility:
+A vital operational health metric that tracks supply-demand balance, showing the 
+percentage of total requests successfully converted into completed trips.
+--------------------------------------------------------------------------------
+
+
+4. DRIVER CANCELLATION RATE EFFECT (%)
+--------------------------------------------------------------------------------
+Formula:
+Driver Cancellation Rate = 
+DIVIDE(
+    CALCULATE(COUNTROWS('Fact_Ride_Bookings'), 'Fact_Ride_Bookings'[Booking Status] = "Cancelled by Driver"),
+    [Total Bookings],
+    0
+)
+
+Technical Architecture Details:
+Filters the transactional dataset to extract rows where the transaction status 
+matches driver cancellations. It evaluates these events against total requests, 
+providing a clear metric for driver behavioral analysis.
+
+Business Case Utility:
+Isolates operational friction on the supply side, helping team leads pinpoint 
+issues with driver engagement, scheduling conflicts, or systemic mismatch triggers.
+--------------------------------------------------------------------------------
+
+
+5. CUSTOMER CANCELLATION RATE EFFECT (%)
+--------------------------------------------------------------------------------
+Formula:
+Customer Cancellation Rate = 
+DIVIDE(
+    CALCULATE(COUNTROWS('Fact_Ride_Bookings'), 'Fact_Ride_Bookings'[Booking Status] = "Cancelled by Customer"),
+    [Total Bookings],
+    0
+)
+
+Technical Architecture Details:
+Calculates customer-initiated cancellations relative to total bookings, applying 
+the same optimized DIVIDE safety logic to ensure fast and consistent visuals.
+
+Business Case Utility:
+Measures customer friction and abandonment rates, which are often tied to long 
+wait times or driver alignment errors, highlighting opportunities to improve user retention.
+--------------------------------------------------------------------------------
+
+
+6. UNFULFILLED DEMAND RATE / NO DRIVER FOUND (%)
+--------------------------------------------------------------------------------
+Formula:
+Unfulfilled Demand Rate = 
+DIVIDE(
+    CALCULATE(COUNTROWS('Fact_Ride_Bookings'), 'Fact_Ride_Bookings'[Booking Status] = "No Driver Found"),
+    [Total Bookings],
+    0
+)
+
+Technical Architecture Details:
+Isolates transactions where the platform matching engine failed to allocate a driver, 
+measuring these supply shortfalls against total market demand.
+
+Business Case Utility:
+Highlights localized supply shortages, helping regional managers optimize vehicle 
+positioning and deploy targeted driver incentives to capture unserved demand.
+--------------------------------------------------------------------------------
+
+
+7. MEAN VEHICLE TURNAROUND ALLOCATION TIME (VTAT)
+--------------------------------------------------------------------------------
+Formula:
+Average VTAT Minutes = AVERAGE('Fact_Ride_Bookings'[Avg VTAT])
+
+Technical Architecture Details:
+Computes the arithmetic mean of the column while automatically ignoring null rows 
+from unfulfilled requests. This guarantees that operational wait-time metrics 
+reflect actual driver response patterns.
+
+Business Case Utility:
+Tracks dispatch efficiency, measuring how quickly drivers accept bookings to help 
+technical teams evaluate the performance of the matching engine.
+--------------------------------------------------------------------------------
+
+
+8. ROLLING SERVICE SATISFACTION INDEX (FLEET RATINGS SCORE)
+--------------------------------------------------------------------------------
+Formula:
+Blended Service Rating = 
+AVERAGEX(
+    KEEPFILTERS('Fact_Ride_Bookings'),
+    DIVIDE('Fact_Ride_Bookings'[Driver Ratings] + 'Fact_Ride_Bookings'[Customer Rating], 2)
+)
+
+Technical Architecture Details:
+Uses an iterative X-function (AVERAGEX) to compute row-by-row rating averages, 
+combining driver and customer scores while preserving existing filter contexts 
+via KEEPFILTERS to maintain accuracy across different visual breakdowns.
+
+Business Case Utility:
+Monitors global service quality, helping quality assurance teams spot drops in 
+satisfaction across specific vehicle classes or geographic zones.
+================================================================================
