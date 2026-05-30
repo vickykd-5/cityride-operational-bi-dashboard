@@ -44,22 +44,22 @@ The primary business objective is to diagnose friction points across the fulfill
 ## 2. Dashboard Preview Section
 
 ### 1. Overview Dashboard
-* ![Overall](screenshots/Overall.JPG)
+![Overall](screenshots/Overall.JPG)
 
 ### 2. Vehicle Type Dashboard
-* ![vehicle type](screenshots/vehicle_type.JPG)
+![vehicle type](screenshots/vehicle_type.JPG)
 
 ### 3. Revenue Analysis Dashboard
-* ![revenue](screenshots/revenue.JPG)
+![revenue](screenshots/revenue.JPG)
 
 ### 4. Ratings Analysis Dashboard
-* ![ratings](screenshots/ratings.JPG)
+![ratings](screenshots/ratings.JPG)
 
 ### 5. Cancellation Dashboard
-* ![cancellation](screenshots/cancellation.JPG)
+![cancellation](screenshots/cancellation.JPG)
 
 ### 6. Summary Dashboard
-* ![summary](screenshots/summary.JPG)
+![summary](screenshots/summary.JPG)
 
 ---
 
@@ -164,17 +164,17 @@ This dashboard converts raw transactional records into actionable operational st
 ---
 
 ## 11. Installation & Usage
-1. **Prerequisites**
+* 1. **Prerequisites**
 Microsoft Power BI Desktop (Latest stable release recommended)
 
 A local clone or download of this repository's assets
 
 Setup Steps
-2. **Clone the Repository Assets:**
+* 2. **Clone the Repository Assets:**
 git clone https://github.com/yourusername/mobility-performance-analytics.git
-3. **Prepare the Data Source Layer:** Place the target localized tabular dataset file (rideBookings.csv) into your dedicated data directory.
-4. **Open the Analytical Project File:** Launch Microsoft Power BI Desktop and open the project file (Tax Fare Report.pbix).
-5. **Update File Pathways:**
+* 3. **Prepare the Data Source Layer:** Place the target localized tabular dataset file (rideBookings.csv) into your dedicated data directory.
+* 4. **Open the Analytical Project File:** Launch Microsoft Power BI Desktop and open the project file (Tax Fare Report.pbix).
+* 5. **Update File Pathways:**
 Inside Power BI Desktop, click on Transform Data to open the Power Query Editor interface.
 
 Under Queries, select your base source path parameters or data tables.
