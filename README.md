@@ -194,3 +194,5 @@ Click Close & Apply to reload the data engine.
 🔗 LinkedIn: https://linkedin.com/in/your-profile
 
 🔗 GitHub: https://github.com/yourusername
+
+`#powerbi-dashboard` `#dax-measures` `#business-intelligence` `#operations-analytics` `#data-modeling` `#etl-pipeline` `#powerquery` `#kpi-dashboard` `#data-visualization` `#revenue-optimization`
