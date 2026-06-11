@@ -191,8 +191,8 @@ Click Close & Apply to reload the data engine.
 
 📧 Email: vivekkdeore001@gmail.com
 
-🔗 LinkedIn: https://linkedin.com/in/your-profile
+🔗 LinkedIn: https://linkedin.com/in/vivekkdeore
 
-🔗 GitHub: https://github.com/yourusername
+🔗 GitHub: https://github.com/vickykd-5
 
 `#powerbi-dashboard` `#dax-measures` `#business-intelligence` `#operations-analytics` `#data-modeling` `#etl-pipeline` `#powerquery` `#kpi-dashboard` `#data-visualization` `#revenue-optimization`
